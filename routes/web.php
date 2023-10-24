@@ -173,7 +173,7 @@ Route::group([
 });
 
 Route::group([
-    'middleware' => 'cors',
+
     'prefix' => 'coupon'
 ], function ($router) {
     Route::get('/view', 'CouponController@indexOp');
