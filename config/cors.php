@@ -6,11 +6,11 @@ return [
      * You can enable CORS for 1 or multiple paths.
      * Example: ['api/*']
      */
-    'paths' => ['api/*'],
+    'paths' => ['nvlogin/getlogininfo', 'coupon_category/getforapp', 'coupon_category/getallforapp', 'brand/view', 'coupon/viewforapp', 'search/searchkey', 'search/view'],
 
     /*
-    * Matches the request method. `[*]` allows all methods.
-    */
+     * Matches the request method. `[*]` allows all methods.
+     */
     'allowed_methods' => ['*'],
 
     /*
