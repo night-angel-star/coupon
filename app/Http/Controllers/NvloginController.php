@@ -182,4 +182,14 @@ class NvloginController extends APIController
         $role = $roleModel->getLevelPermission($user->level_id, $func['id']);
         return $role['permission'];
     }
+
+    public function getLoginInfo(Request $request)
+    {
+        $nvloginModel = new nvlogin_model();
+        $loginInfo = $nvloginModel->getLoginInfo($request->all());
+        return [
+            "status" => 201,
+            "result" => $loginInfo
+        ];
+    }
 }

@@ -54,8 +54,6 @@ class JobController extends APIController
         }
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|unique:jobs',
-            //  'login_id' => 'required',
-            //            'machine_id' => 'required',
         ]);
 
         if ($validator->fails()) {
@@ -65,8 +63,7 @@ class JobController extends APIController
             $permission = $this->getPermission("add", $user);
             if ($permission) {
                 $jobModel = new job_model();
-                $job = $jobModel->add($request->all());
-
+                $newJob = $jobModel->add($request->all());
                 $log = new log_model();
                 $log->Add(
                     array(
@@ -77,7 +74,7 @@ class JobController extends APIController
                     )
                 );
 
-                return $this->responseSuccess('Add successfully.');
+                return response()->json($newJob);
             } else {
                 return [
                     "status" => 401,
@@ -95,8 +92,6 @@ class JobController extends APIController
         }
         $validator = Validator::make($request->all(), [
             'name' => 'required|string',
-            // 'login_id' => 'required',
-            // 'machine_id' => 'required',
         ]);
 
         if ($validator->fails()) {

@@ -143,15 +143,15 @@ class GoodsController extends APIController
             $permission = $this->getPermission("del", $user);
             if ($permission) {
                 $goodsModel = new goods_model();
+                $goodResult = $goodsModel->get($request['id']);
                 $good = $goodsModel->del($request['id']);
-                $good = $goodsModel->get($request['id']);
 
                 $log = new log_model();
                 $log->Add(
                     array(
                         'member_id' => $user->id,
                         'function_id' => 8,
-                        'function_param' => $good['good']['name'],
+                        'function_param' => $goodResult['good']['name'],
                         'detail_log' => ""
                     )
                 );

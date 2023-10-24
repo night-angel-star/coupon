@@ -78,4 +78,25 @@ class nvlogin_model extends Model
             'message' => 'Resource deleted.',
         ];
     }
+
+    public function getLoginInfo($info)
+    {
+        $machine = DB::table("machines")->where("machine_id", $info['machine_id'])->first();
+        if ($machine) {
+            if ($machine->job_id) {
+                $job = DB::table('jobs')->where('id', $machine->job_id)->first();
+                if ($job->login_id) {
+                    $login = DB::table('nvlogins')->where('id', $job->login_id)->first();
+
+                    return ["login_info" => $login, "job_info" => $job];
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+    }
 }

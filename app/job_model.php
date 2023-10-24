@@ -12,6 +12,7 @@ class job_model extends Model
     protected $fillable = [
         'name',
         'login_id',
+        'machine_id'
     ];
     protected $table = "jobs";
 
@@ -29,10 +30,10 @@ class job_model extends Model
             if ($job->login_id) {
                 $nvlogin = $nvlogin_model->where('id', $job->login_id)->firstOrFail();
             }
-            // $machine = null;
-            // if ($job->machine_id) {
-            //     $machine = $machine_model->where('id', $job->machine_id)->firstOrFail();
-            // }
+            $machine = null;
+            if ($job->machine_id) {
+                $machine = $machine_model->where('id', $job->machine_id)->firstOrFail();
+            }
             $task_goods = DB::table("task_goods")
                 ->where("job_id", $job->id)
                 ->get();
@@ -59,7 +60,7 @@ class job_model extends Model
                 'id' => $job->id,
                 'name' => $job->name,
                 'login' => $nvlogin,
-                // 'machine' => $machine,
+                'machine' => $machine,
                 'goods' => $goodsList,
                 'surfing' => $surfingsList,
             ]);
@@ -105,37 +106,37 @@ class job_model extends Model
             $job->name = $info['name'];
         }
         if (empty($info['login_id'])) {
-    	    $job->login_id = null;
-        } else  {
+            $job->login_id = null;
+        } else {
             $job->login_id = $info['login_id'];
         }
-        // if ($info['machine_id']) {
-        //     $job->machine_id = $info['machine_id'];
-        // }
+        if ($info['machine_id']) {
+            $job->machine_id = $info['machine_id'];
+        }
         $job->save();
 
         $nvloginModel = new nvlogin_model();
-        if ($nvloginModel->where('job_id', $job->id)->count()> 0 ){
-        $nvlogin = $nvloginModel->where('job_id', $job->id)->firstOrFail();
-        $nvlogin->job_id = null;
-        $nvlogin->save();
+        if ($nvloginModel->where('job_id', $job->id)->count() > 0) {
+            $nvlogin = $nvloginModel->where('job_id', $job->id)->firstOrFail();
+            $nvlogin->job_id = null;
+            $nvlogin->save();
         }
-        
+
         if (!empty($info['login_id'])) {
-        $nvlogin = $nvloginModel->where('id', $info['login_id'])->firstOrFail();
-        $nvlogin->job_id = $job->id;
-        $nvlogin->save();
+            $nvlogin = $nvloginModel->where('id', $info['login_id'])->firstOrFail();
+            $nvlogin->job_id = $job->id;
+            $nvlogin->save();
         }
-        // $machineModel = new machine_model();
-        // $machine = $machineModel->where('id', $info['machine_id'])->firstOrFail();
-        // $machine->job_id = $job->id;
-        // $machine->save();
-        // $machine = $machineModel->where('job_id', $job->id)->firstOrFail();
-        // $machine->job_id = null;
-        // $machine->save();
-        // $machine = $machineModel->where('id', $info['machine_id'])->firstOrFail();
-        // $machine->job_id = $job->id;
-        // $machine->save();
+        $machineModel = new machine_model();
+        $machine = $machineModel->where('id', $info['machine_id'])->firstOrFail();
+        $machine->job_id = $job->id;
+        $machine->save();
+        $machine = $machineModel->where('job_id', $job->id)->firstOrFail();
+        $machine->job_id = null;
+        $machine->save();
+        $machine = $machineModel->where('id', $info['machine_id'])->firstOrFail();
+        $machine->job_id = $job->id;
+        $machine->save();
         $task_goods_model = new task_goods_model();
         $task_goods_model->where('job_id', $job->id)->delete();
         foreach ($info['goods'] as $goods_id) {
@@ -153,27 +154,24 @@ class job_model extends Model
     }
     public function add($info)
     {
-	if (empty($info['login_id'])) {
-	    $newJob = $this->create([
-	        'name' => $info['name']
-            ]);
-        
-	} else {
-
         $newJob = $this->create([
             'name' => $info['name'],
-            'login_id' => $info['login_id'],
-            // 'machine_id' => $info['machine_id'],
+            'login_id' => empty($info['login_id']) ? null : $info['login_id'],
+            'machine_id' => empty($info['machine_id']) ? null : $info['machine_id'],
         ]);
-        $nvloginModel = new nvlogin_model();
-        $nvlogin = $nvloginModel->where('id', $info['login_id'])->firstOrFail();
-        $nvlogin->job_id = $newJob->id;
-        $nvlogin->save();
+        if (!empty($info['login_id'])) {
+            $nvloginModel = new nvlogin_model();
+            $nvlogin = $nvloginModel->where('id', $info['login_id'])->firstOrFail();
+            $nvlogin->job_id = $newJob->id;
+            $nvlogin->save();
         }
-        // $machineModel = new machine_model();
-        // $machine = $machineModel->where('id', $info['machine_id'])->firstOrFail();
-        // $machine->job_id = $newJob->id;
-        // $machine->save();
+        if (!empty($info['login_id'])) {
+            $machineModel = new machine_model();
+            $machine = $machineModel->where('id', $info['machine_id'])->firstOrFail();
+            $machine->job_id = $newJob->id;
+            $machine->save();
+        }
+
         $task_goods_model = new task_goods_model();
         foreach ($info['goods'] as $goods_id) {
             $task_goods_model->add($newJob->id, $goods_id);
