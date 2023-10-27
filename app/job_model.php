@@ -192,6 +192,10 @@ class job_model extends Model
         $task_goodsModel->where('job_id', $id)->delete();
         $task_surfingModel = new task_surfing_model();
         $task_surfingModel->where('job_id', $id)->delete();
+        $nvloginModel = new nvlogin_model();
+        $nvloginModel->where('job_id', $id)->update(['job_id' => null]);
+        $machineModel = new machine_model();
+        $machineModel->where('job_id', $id)->update(['job_id' => null]);
         return [
             'status' => 201,
             'message' => 'Resource deleted.',
