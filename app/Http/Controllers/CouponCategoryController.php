@@ -66,6 +66,7 @@ class CouponCategoryController extends APIController
 
     public function indexOpForApp(Request $request)
     {
+        // dd(1);
         $CategoryModel = new coupon_category_model();
         $categoryList = $CategoryModel->topListForApp();
         return [

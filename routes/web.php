@@ -8,9 +8,9 @@
  * | Here is where the routes are registered for our application.
  * |
  */
-Route::get('/', function () {
-    return view('index');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 // Named route required for SendsPasswordResetEmails.
 
 Route::group([
