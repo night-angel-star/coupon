@@ -84,11 +84,48 @@ class nvlogin_model extends Model
         $machine = DB::table("machines")->where("machine_id", $info['machine_id'])->first();
         if ($machine) {
             if ($machine->job_id) {
+
                 $job = DB::table('jobs')->where('id', $machine->job_id)->first();
+                $goods_model = new goods_model();
+                $surfing_model = new surfing_model();
+
+                $task_goods = DB::table("task_goods")
+                    ->where("job_id", $job->id)
+                    ->get();
+
+                $goodsList = collect([]);
+                if (json_encode($task_goods) != "[]") {
+                    foreach ($task_goods as $task_good) {
+
+                        $goods = $goods_model->where('id', $task_good->goods_id)->firstOrFail();
+                        $goodsList->push($goods);
+                    }
+                }
+
+                $surfingsList = collect([]);
+                $task_surfings = DB::table("task_surfings")
+                    ->where("job_id", $job->id)
+                    ->get();
+                if (json_encode($task_surfings) != "[]") {
+                    foreach ($task_surfings as $task_surfing) {
+                        $surfing = $surfing_model->where('id', $task_surfing->surfing_id)->firstOrFail();
+                        $surfing->delay = $task_surfing->delay;
+                        $surfingsList->push($surfing);
+                    }
+                }
+
+                $job_info = [
+                    'goods' => $goodsList,
+                    'surfings' => $surfingsList,
+                ];
+
+
+
+
                 if ($job->login_id) {
                     $login = DB::table('nvlogins')->where('id', $job->login_id)->first();
 
-                    return ["login_info" => $login, "job_info" => $job];
+                    return ["login_info" => $login, "job_info" => $job_info];
                 } else {
                     return null;
                 }
