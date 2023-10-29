@@ -193,7 +193,10 @@ Route::group([
 ], function ($router) {
     Route::post('/upload', 'fileUploadController@uploadFile');
     Route::post('/delete', 'fileUploadController@deleteFile');
+    Route::post('/deleteadvert', 'fileUploadController@deleteAdvert');
+    Route::get('/getadverts', 'fileUploadController@getAdverts');
 });
+
 
 Route::group([
     'middleware' => 'cors',
