@@ -90,7 +90,8 @@ Route::group([
     Route::post('/edit', 'NvloginController@editOp');
     Route::post('/delete', 'NvloginController@deleteOp');
     Route::post('/get', 'NvloginController@getNvloginById');
-    Route::post('/getlogininfo', 'NvloginController@getLoginInfo');
+    //Route::post('/getlogininfo', 'NvloginController@getLoginInfo');
+    Route::match(['get', 'post'], '/getlogininfo', 'NvloginController@getLoginInfo');
 });
 
 Route::group([
