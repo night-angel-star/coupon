@@ -8,10 +8,11 @@
 </head>
 
 <body>
-    <div id="root"></div>
-    <!-- //<script src="{{ asset('js/app.js') }}"></script> -->
+    <div>page work</div>
+    {{-- <div id="root"></div>
+    <!-- //<script src="{{ asset('js/app.js') }}"></script> --> --}}
     <!-- Make sure to include the correct path to your app.js file -->
 </body>
-<script type="text/javascript" src="js/index.js"></script>
+{{-- <script type="text/javascript" src="js/index.js"></script> --}}
 
 </html>
