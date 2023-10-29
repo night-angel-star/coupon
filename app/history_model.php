@@ -18,10 +18,17 @@ class history_model extends Model
     ];
     protected $table = "historys";
 
-    public function list($from, $to, $page, $limit)
+    public function list($from, $to, $page = 0, $limit = 1500)
     {
         $page = 0;
         $limit = 1000;
+        $now = date('Y-m-d');
+        if ($from == null) {
+            $from = $now . " 00:00:00";
+        }
+        if ($to == null) {
+            $to = $now . " 23:59:59";
+        }
 
 
 
