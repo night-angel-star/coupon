@@ -79,7 +79,7 @@ class history_model extends Model
     public function add($info)
     {
         $this->create([
-            'time' => new DateTime($info['time']),
+            'time' => new DateTime(),
             'machine' => $info['machine'],
             'action' => $info['action'],
         ]);

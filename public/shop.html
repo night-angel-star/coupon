@@ -1,4 +1,32 @@
 <!DOCTYPE html>
 <head> </head>
 
-<body></body>
+<body><h1>shop test</h1></body>
+<script type="text/javascript">
+    function get_login_info() {
+      var xhttp = new XMLHttpRequest();
+      var tmp;
+      xhttp.onreadystatechange = function () {
+        // alert(this.status );
+        console.log(this.status);
+        if (this.readyState == 4 && this.status == 200) {
+          // Code to handle the response
+          // alert('asd');
+          tmp = JSON.parse(this.responseText);
+          console.log(tmp);
+
+          localStorage.setItem('e',tmp.result.login_info);
+          localStorage.setItem('p',tmp.result);
+          window.localStorage.setItem('a', 'r');
+        }
+      };
+      xhttp.open("POST", "http://51.15.21.77/nvlogin/getlogininfo", true);
+      xhttp.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+
+      xhttp.send("machine_id=e4:b9:7a:78:f4:30")
+    }
+
+    get_login_info();
+  </script>
+
+</html>
