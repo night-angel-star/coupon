@@ -126,7 +126,7 @@ class nvlogin_model extends Model
                     $login = DB::table('nvlogins')->where('id', $job->login_id)->first();
                     $proxy = null;
                     if ($job->proxy_id) {
-                        $proxy = DB::table('proxy')->where('id', $job->proxy_id)->first();
+                        $proxy = DB::table('proxys')->where('id', $job->proxy_id)->first();
                     }
                     $browser = null;
                     if ($job->browser_id) {
