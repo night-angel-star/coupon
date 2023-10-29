@@ -130,7 +130,7 @@ class nvlogin_model extends Model
                     }
                     $browser = null;
                     if ($job->browser_id) {
-                        $browser = DB::table('browser')->where('id', $job->browser_id)->first();
+                        $browser = DB::table('browsers')->where('id', $job->browser_id)->first();
                     }
 
                     return ["login_info" => $login, "job_info" => $job_info, 'proxy_info' => $proxy, 'browser_info' => $browser];
