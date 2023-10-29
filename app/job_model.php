@@ -24,6 +24,8 @@ class job_model extends Model
         $surfing_model = new surfing_model();
         $nvlogin_model = new nvlogin_model();
         $machine_model = new machine_model();
+        $proxy_model = new proxy_model();
+        $browser_model = new browser_model();
         $jobsList = collect([]);
         foreach ($jobs as $job) {
             $nvlogin = null;
@@ -33,6 +35,14 @@ class job_model extends Model
             $machine = null;
             if ($job->machine_id) {
                 $machine = $machine_model->where('id', $job->machine_id)->firstOrFail();
+            }
+            $proxy = null;
+            if ($job->proxy_id) {
+                $proxy = $proxy_model->where('id', $job->proxy_id)->firstOrFail();
+            }
+            $browser = null;
+            if ($job->browser_id) {
+                $browser = $browser_model->where('id', $job->browser_id)->firstOrFail();
             }
             $task_goods = DB::table("task_goods")
                 ->where("job_id", $job->id)
@@ -61,6 +71,8 @@ class job_model extends Model
                 'name' => $job->name,
                 'login' => $nvlogin,
                 'machine' => $machine,
+                'proxy' => $proxy,
+                'browser' => $browser,
                 'goods' => $goodsList,
                 'surfing' => $surfingsList,
             ]);
@@ -113,6 +125,16 @@ class job_model extends Model
         if ($info['machine_id']) {
             $job->machine_id = $info['machine_id'];
         }
+        if (empty($info['proxy_id'])) {
+            $job->proxy_id = null;
+        } else {
+            $job->proxy_id = $info['proxy_id'];
+        }
+        if (empty($info['browser_id'])) {
+            $job->browser_id = null;
+        } else {
+            $job->browser_id = $info['browser_id'];
+        }
         $job->save();
 
         $nvloginModel = new nvlogin_model();
@@ -158,6 +180,8 @@ class job_model extends Model
             'name' => $info['name'],
             'login_id' => empty($info['login_id']) ? null : $info['login_id'],
             'machine_id' => empty($info['machine_id']) ? null : $info['machine_id'],
+            'proxy_id' => empty($info['proxy_id']) ? null : $info['proxy_id'],
+            'browser_id' => empty($info['browser_id']) ? null : $info['browser_id'],
         ]);
         if (!empty($info['login_id'])) {
             $nvloginModel = new nvlogin_model();

@@ -18,6 +18,8 @@ class CreateJobsTable extends Migration
             $table->String('name');
             $table->Integer('login_id')->nullable();
             $table->Integer('machine_id')->nullable();
+            $table->Integer('proxy_id')->nullable();
+            $table->integer('browser_id')->nullable();
             $table->timestamps();
         });
     }
