@@ -57,11 +57,11 @@ class HistoryController extends APIController
     }
     public function addOp(Request $request)
     {
-        if (!$user = auth()->setRequest($request)->user()) {
-            return $this->responseUnauthorized();
-        }
+        // if (!$user = auth()->setRequest($request)->user()) {
+        //     return $this->responseUnauthorized();
+        // }
         $validator = Validator::make($request->all(), [
-            'time' => 'required',
+            // 'time' => 'required',
             'machine' => 'required|string',
             'action' => 'required|string',
         ]);
@@ -70,17 +70,17 @@ class HistoryController extends APIController
             return $this->responseUnprocessable($validator->errors());
         }
         try {
-            $permission = $this->getPermission("view", $user);
-            if ($permission) {
-                $historyModel = new history_model();
-                $history = $historyModel->add($request->all());
-                return $this->responseSuccess('Add successfully.');
-            } else {
-                return [
-                    "status" => 401,
-                    "message" => "This is forbidden."
-                ];
-            }
+            // $permission = $this->getPermission("view", $user);
+            // if ($permission) {
+            $historyModel = new history_model();
+            $history = $historyModel->add($request->all());
+            return $this->responseSuccess('Add successfully.');
+            // } else {
+            //     return [
+            //         "status" => 401,
+            //         "message" => "This is forbidden."
+            //     ];
+            // }
         } catch (Exception $e) {
             return $this->responseServerError('Registration error.');
         }
