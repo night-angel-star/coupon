@@ -1,7 +1,7 @@
-const navigateUri = "https://asos.com/search/";
+const navigateUri = "https://28mall.com/wap/tmpl/search.html";
 function navigate() {
-  window.location.href = navigateUri;
-  return navigateUri;
+    window.location.href = navigateUri;
+    return navigateUri;
 }
 
 navigate();
