@@ -237,12 +237,16 @@ class job_model extends Model
     }
     public function unsetMachine($machine_id)
     {
-        $job = $this->where('machine_id', $machine_id)->firstOrFail();
-        $job->machine_id = null;
-        $job->save();
-        return [
-            'status' => 201,
-            'message' => 'Resource deleted.',
-        ];
+        try {
+            $job = $this->where('machine_id', $machine_id)->firstOrFail();
+            $job->machine_id = null;
+            $job->save();
+            return [
+                'status' => 201,
+                'message' => 'Resource deleted.',
+            ];
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+
+        }
     }
 }
