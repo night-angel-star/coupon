@@ -1,9 +1,10 @@
-const navigateUri = "https://my.asos.com/my-account";
+const navigateUri = "https://28mall.com/wap/tmpl/member/member.html";
+const loginUri = "https://28mall.com/wap/tmpl/member/email_login.html";
 function inject() {
     // if (window.location.href !== "https://192.168.148.184/coupon.html") {
     //     window.location.href = "http://192.168.148.184/coupon.html";
     // }
-    if (window.location.href.includes("https://my.asos.com/identity/login")) {
+    if (window.location.href.includes(loginUri)) {
         // const usernameInput = document.getElementById("CustomerEmail");
         // const passwordInput = document.getElementById("CustomerPassword");
         // const loginButton = document.querySelector(
@@ -12,9 +13,9 @@ function inject() {
         // const usernameInput = document.querySelector(usernameInputSelector);
         // const passwordInput = document.querySelector(passwordInputSelector);
         // const loginButton = document.querySelector(loginButtonSelector);
-        const usernameInput = document.getElementById("EmailAddress");
-        const passwordInput = document.getElementById("Password");
-        const loginButton = document.getElementById("signin");
+        const usernameInput = document.getElementById("username");
+        const passwordInput = document.getElementById("userpwd");
+        const loginButton = document.getElementById("loginbtn");
 
         function inputUserName() {
             usernameInput.value = "USERNAMEFORREPLACE";

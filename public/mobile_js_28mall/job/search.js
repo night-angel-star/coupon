@@ -12,9 +12,9 @@ function search() {
     // let inputDelay = selectDelay + Math.random() * 1000;
     // let searchDelay = inputDelay + Math.random() * 1000;
     let searchInput = document.getElementById("keyword");
+    let searchButton = document.getElementById("header-nav");
     let inputDelay = 500 + Math.random() * 1000;
     let searchDelay = inputDelay + Math.random() * 1000;
-    let searchButton = document.getElementById("header-nav");
 
     let searchStr = "SEARCHSTRFORREPLACE";
 
