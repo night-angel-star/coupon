@@ -1,7 +1,7 @@
-const navigateUri = "https://my.asos.com/identity/login";
+const navigateUri = "https://www.rriveter.com/account/login";
 function navigate() {
-  window.location.href = navigateUri;
-  return navigateUri;
+    window.location.href = navigateUri;
+    return navigateUri;
 }
 
 navigate();

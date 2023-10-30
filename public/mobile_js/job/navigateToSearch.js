@@ -1,4 +1,4 @@
-const navigateUri = "https://28mall.com/wap/tmpl/search.html";
+const navigateUri = "https://www.rriveter.com/search";
 function navigate() {
     window.location.href = navigateUri;
     return navigateUri;
