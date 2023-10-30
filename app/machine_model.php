@@ -74,9 +74,11 @@ class machine_model extends Model
 
     public function nvLoginSet($info, $ip)
     {
-        $machine = $this->where('machine_id', $info['machine_id'])->firstOrFail();
+        $machine = $this->where('machine_id', $info['machine_id'])->firstOrCreate();
         $machine->ip = $ip;
+        $machine->type = $info['type'];
         $machine->last_access = new DateTime();
+
         $machine->save();
     }
     public function add($info)
