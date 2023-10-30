@@ -1,5 +1,5 @@
 function likeGoods() {
-    alert("liked");
+    // alert("liked");
     return "success";
 }
 
