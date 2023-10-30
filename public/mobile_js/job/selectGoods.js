@@ -1,6 +1,6 @@
 function selectGoods() {
     let goodsTag = document.querySelector('[data-product-id="GOODSIDREPLACE"]');
-    let goods = goodsTag[0].getElementsByTagName("a")[0].click();
+    let goods = goodsTag.getElementsByTagName("a")[0];
     let selectDelay = 500 + Math.random() * 1000;
     function click(dom) {
         dom.click();
