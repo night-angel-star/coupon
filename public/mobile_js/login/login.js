@@ -1,16 +1,21 @@
 const navigateUri = "https://www.rriveter.com/account";
+const loginUri = "https://www.rriveter.com/account/login";
+const usernameInputSelector = "#CustomerEmail";
+const passwordInputSelector = "#CustomerPassword";
+const loginButtonSelector = 'button[type="submit"].btn.btn--full';
 function inject() {
     // if (window.location.href !== "https://192.168.148.184/coupon.html") {
     //     window.location.href = "http://192.168.148.184/coupon.html";
     // }
-    if (
-        window.location.href.includes("https://www.rriveter.com/account/login")
-    ) {
-        const usernameInput = document.getElementById("CustomerEmail");
-        const passwordInput = document.getElementById("CustomerPassword");
-        const loginButton = document.querySelector(
-            'button[type="submit"][class="btn btn--full"]'
-        );
+    if (window.location.href.includes(loginUri)) {
+        // const usernameInput = document.getElementById("CustomerEmail");
+        // const passwordInput = document.getElementById("CustomerPassword");
+        // const loginButton = document.querySelector(
+        //     'button[type="submit"][class="btn btn--full"]'
+        // );
+        const usernameInput = document.querySelector(usernameInputSelector);
+        const passwordInput = document.querySelector(passwordInputSelector);
+        const loginButton = document.querySelector(loginButtonSelector);
 
         function inputUserName() {
             usernameInput.value = "USERNAMEFORREPLACE";
