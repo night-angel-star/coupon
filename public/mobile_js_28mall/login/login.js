@@ -18,11 +18,17 @@ function inject() {
         const loginButton = document.getElementById("loginbtn");
 
         function inputUserName() {
-            usernameInput.value = "USERNAMEFORREPLACE";
+            navigator.clipboard.writeText("USERNAMEFORREPLACE").then(() => {
+                usernameInput.focus();
+                document.execCommand("paste");
+            });
         }
 
         function inputPassword() {
-            passwordInput.value = "PASSWORDFORREPLACE";
+            navigator.clipboard.writeText("PASSWORDFORREPLACE").then(() => {
+                passwordInput.focus();
+                document.execCommand("paste");
+            });
         }
         function clickLogin() {
             loginButton.click();
