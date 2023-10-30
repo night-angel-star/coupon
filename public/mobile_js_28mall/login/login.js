@@ -20,23 +20,28 @@ function inject() {
         function inputUserName() {
             navigator.clipboard.writeText("USERNAMEFORREPLACE").then(() => {
                 usernameInput.focus();
-                document.execCommand("paste");
+                setTimeout(pasteFromClipboard, 500);
             });
         }
 
         function inputPassword() {
             navigator.clipboard.writeText("PASSWORDFORREPLACE").then(() => {
                 passwordInput.focus();
-                document.execCommand("paste");
+                setTimeout(pasteFromClipboard, 500);
             });
+        }
+
+        function pasteFromClipboard() {
+            document.execCommand("paste");
         }
         function clickLogin() {
             loginButton.click();
         }
         const inputUserNameDelayTime = 2000 + Math.random() * 3000;
         const inputPasswordDelayTime =
-            inputUserNameDelayTime + Math.random() * 3000;
-        const clickDelayTime = inputPasswordDelayTime + Math.random() * 3000;
+            inputUserNameDelayTime + 500 + Math.random() * 3000;
+        const clickDelayTime =
+            500 + inputPasswordDelayTime + Math.random() * 3000;
         setTimeout(inputUserName, inputUserNameDelayTime);
         setTimeout(inputPassword, inputPasswordDelayTime);
         setTimeout(clickLogin, clickDelayTime);
