@@ -81,7 +81,7 @@ class machine_model extends Model
             $machine->save();
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
             $info["ip"] = $ip;
-            add($info);
+            $this->add($info);
         }
     }
     public function add($info)
