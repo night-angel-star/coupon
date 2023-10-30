@@ -61,6 +61,8 @@ class nvlogin_model extends Model
             "message" => "Edited successfully."
         ];
     }
+
+
     public function add($info)
     {
         $this->create([
@@ -132,12 +134,12 @@ class nvlogin_model extends Model
                     if ($job->browser_id) {
                         $browser = DB::table('browsers')->where('id', $job->browser_id)->first();
                     }
-                    $machine=null;
-                    if($job->machine_id){
+                    $machine = null;
+                    if ($job->machine_id) {
                         $machine = DB::table('machines')->where('id', $job->machine_id)->first();
                     }
 
-                    return ["login_info" => $login, "job_info" => $job_info, 'proxy_info' => $proxy, 'browser_info' => $browser, 'machine_info'=>$machine];
+                    return ["login_info" => $login, "job_info" => $job_info, 'proxy_info' => $proxy, 'browser_info' => $browser, 'machine_info' => $machine];
                 } else {
                     return null;
                 }

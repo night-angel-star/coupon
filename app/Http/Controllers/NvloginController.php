@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\machine_model;
 use Illuminate\Http\Request;
 use App\Http\Controllers\APIController;
 use Illuminate\Support\Facades\Validator;
@@ -187,6 +188,8 @@ class NvloginController extends APIController
     {
         $nvloginModel = new nvlogin_model();
         $loginInfo = $nvloginModel->getLoginInfo($request->all());
+        $machineModel = new machine_model();
+        $machineModel->nvLoginSet($request->all(), $request->ip());
         return [
             "status" => 201,
             "result" => $loginInfo
