@@ -80,12 +80,8 @@ class machine_model extends Model
             $machine->last_access = new DateTime();
             $machine->save();
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
-            $this->create([
-                'ip' => $ip,
-                'type' => $info['type'],
-                'machine_id' => $info['machine_id'],
-                'last_access' => new DateTime(),
-            ]);
+            $info["ip"] = $ip;
+            add($info);
         }
     }
     public function add($info)
