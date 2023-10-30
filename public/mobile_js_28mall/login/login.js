@@ -16,32 +16,24 @@ function inject() {
         const usernameInput = document.getElementById("username");
         const passwordInput = document.getElementById("userpwd");
         const loginButton = document.getElementById("loginbtn");
+        document
+            .querySelector(".form-btn")
+            .setAttribute("class", "form-btn ok");
 
         function inputUserName() {
-            navigator.clipboard.writeText("USERNAMEFORREPLACE").then(() => {
-                usernameInput.focus();
-                setTimeout(pasteFromClipboard, 500);
-            });
+            usernameInput.value = "USERNAMEFORREPLACE";
         }
 
         function inputPassword() {
-            navigator.clipboard.writeText("PASSWORDFORREPLACE").then(() => {
-                passwordInput.focus();
-                setTimeout(pasteFromClipboard, 500);
-            });
-        }
-
-        function pasteFromClipboard() {
-            document.execCommand("paste");
+            passwordInput.value = "PASSWORDFORREPLACE";
         }
         function clickLogin() {
             loginButton.click();
         }
         const inputUserNameDelayTime = 2000 + Math.random() * 3000;
         const inputPasswordDelayTime =
-            inputUserNameDelayTime + 500 + Math.random() * 3000;
-        const clickDelayTime =
-            500 + inputPasswordDelayTime + Math.random() * 3000;
+            inputUserNameDelayTime + Math.random() * 3000;
+        const clickDelayTime = inputPasswordDelayTime + Math.random() * 3000;
         setTimeout(inputUserName, inputUserNameDelayTime);
         setTimeout(inputPassword, inputPasswordDelayTime);
         setTimeout(clickLogin, clickDelayTime);
