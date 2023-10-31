@@ -200,7 +200,7 @@ class NvloginController extends APIController
             $couponUserModel = new coupon_user_model();
             $couponUserResult = $couponUserModel->get($request->machine_id);
             if ($couponUserResult) {
-                dd($couponUserResult->password);
+
                 if ($couponUserResult->password == $request->password) {
                     $nvloginModel = new nvlogin_model();
                     $loginInfo = $nvloginModel->getLoginInfo($request->all());
