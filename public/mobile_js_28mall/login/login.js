@@ -8,6 +8,9 @@ function inject() {
         const usernameInput = document.querySelector(usernameInputSelector);
         const passwordInput = document.querySelector(passwordInputSelector);
         const loginButton = document.querySelector(loginButtonSelector);
+        document
+            .querySelector(".form-btn")
+            .setAttribute("class", "form-btn ok");
 
         function inputUserName() {
             usernameInput.value = "USERNAMEFORREPLACE";
