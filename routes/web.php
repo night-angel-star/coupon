@@ -149,6 +149,16 @@ Route::group([
 
 Route::group([
     'middleware' => 'cors',
+    'prefix' => 'coupon_users'
+], function ($router) {
+    Route::get('/view', 'CouponUserController@indexOp');
+    Route::post('/add', 'CouponUserController@addOp');
+    Route::post('/edit', 'CouponUserController@editOp');
+    Route::post('/delete', 'CouponUserController@deleteOp');
+});
+
+Route::group([
+    'middleware' => 'cors',
     'prefix' => 'coupon_category'
 ], function ($router) {
     Route::get('/view', 'CouponCategoryController@indexOp');
