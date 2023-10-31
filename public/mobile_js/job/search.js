@@ -3,11 +3,6 @@ const searchIconSelector =
 const searchInputSelector = ".search__input";
 const searchButtonSelector = ".btn--search";
 function search() {
-    // let searchIcon = document.getElementsByClassName(
-    //     "site-nav__link site-nav__link--icon js-search-header medium-up--hide"
-    // )[0];
-    // let searchInput = document.getElementsByClassName("search__input")[0];
-    // let searchButton = document.getElementsByClassName("btn--search")[0];
     let searchIcon = document.querySelector(searchIconSelector);
     let searchInput = document.querySelector(searchInputSelector);
     let searchButton = document.querySelector(searchButtonSelector);

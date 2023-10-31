@@ -1,21 +1,13 @@
 const navigateUri = "https://28mall.com/wap/tmpl/member/member.html";
 const loginUri = "https://28mall.com/wap/tmpl/member/email_login.html";
+const usernameInputSelector = "#username";
+const passwordInputSelector = "#userpwd";
+const loginButtonSelector = "#loginbtn";
 function inject() {
-    // if (window.location.href !== "https://192.168.148.184/coupon.html") {
-    //     window.location.href = "http://192.168.148.184/coupon.html";
-    // }
     if (window.location.href.includes(loginUri)) {
-        // const usernameInput = document.getElementById("CustomerEmail");
-        // const passwordInput = document.getElementById("CustomerPassword");
-        // const loginButton = document.querySelector(
-        //     'button[type="submit"][class="btn btn--full"]'
-        // );
-        // const usernameInput = document.querySelector(usernameInputSelector);
-        // const passwordInput = document.querySelector(passwordInputSelector);
-        // const loginButton = document.querySelector(loginButtonSelector);
-        const usernameInput = document.getElementById("username");
-        const passwordInput = document.getElementById("userpwd");
-        const loginButton = document.getElementById("loginbtn");
+        const usernameInput = document.getElementById(usernameInputSelector);
+        const passwordInput = document.getElementById(passwordInputSelector);
+        const loginButton = document.getElementById(loginButtonSelector);
         document
             .querySelector(".form-btn")
             .setAttribute("class", "form-btn ok");
