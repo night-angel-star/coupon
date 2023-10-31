@@ -92,7 +92,7 @@ class MachineController extends APIController
             return $this->responseUnauthorized();
         }
         $validator = Validator::make($request->all(), [
-            'ip' => 'required|string|unique:machines',
+            'ip' => 'required|string',
             'type' => 'required|string',
             'machine_id' => 'required|string|unique',
         ]);
