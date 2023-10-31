@@ -5,12 +5,9 @@ const passwordInputSelector = "#userpwd";
 const loginButtonSelector = "#loginbtn";
 function inject() {
     if (window.location.href.includes(loginUri)) {
-        const usernameInput = document.getElementById(usernameInputSelector);
-        const passwordInput = document.getElementById(passwordInputSelector);
-        const loginButton = document.getElementById(loginButtonSelector);
-        document
-            .querySelector(".form-btn")
-            .setAttribute("class", "form-btn ok");
+        const usernameInput = document.querySelector(usernameInputSelector);
+        const passwordInput = document.querySelector(passwordInputSelector);
+        const loginButton = document.querySelector(loginButtonSelector);
 
         function inputUserName() {
             usernameInput.value = "USERNAMEFORREPLACE";
