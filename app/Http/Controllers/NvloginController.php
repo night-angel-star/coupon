@@ -11,6 +11,7 @@ use App\nvlogin_model;
 use App\function_model;
 use App\role_model;
 use App\log_model;
+use App\coupon_user_model;
 
 class NvloginController extends APIController
 {
