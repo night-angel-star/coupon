@@ -205,6 +205,7 @@ Route::group([
     Route::post('/delete', 'fileUploadController@deleteFile');
     Route::post('/deleteadvert', 'fileUploadController@deleteAdvert');
     Route::get('/getadverts', 'fileUploadController@getAdverts');
+    Route::get('/getadvertCount', 'fileUploadController@getadvertCount');
 });
 
 
