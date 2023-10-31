@@ -122,7 +122,9 @@ class job_model extends Model
         } else {
             $job->login_id = $info['login_id'];
         }
-        if ($info['machine_id']) {
+        if (empty($info["machine_id"])) {
+            $job->machine_id = null;
+        } else {
             $job->machine_id = $info['machine_id'];
         }
         if (empty($info['proxy_id'])) {
