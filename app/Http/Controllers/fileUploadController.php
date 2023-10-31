@@ -43,7 +43,7 @@ class fileUploadController extends Controller
         return response()->json(['message' => 'File not found'], 404);
     }
 
-    public function getAdvertCount(Request $request)
+    public function getadvertCount(Request $request)
     {
         $filePath1 = public_path('uploads/Advertisement1.jpg');
         $filePath2 = public_path('uploads/Advertisement2.jpg');
