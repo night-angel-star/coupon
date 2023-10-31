@@ -24,10 +24,10 @@ class coupon_user_model extends Model
         ];
     }
 
-    public function get($id)
+    public function get($user)
     {
         try {
-            $couponUsers = $this->where('id', $id)->firstOrFail();
+            $couponUsers = $this->where('user', $user)->firstOrFail();
             return $couponUsers;
         } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
             return null;
