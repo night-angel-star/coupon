@@ -187,13 +187,43 @@ class NvloginController extends APIController
 
     public function getLoginInfo(Request $request)
     {
-        $nvloginModel = new nvlogin_model();
-        $loginInfo = $nvloginModel->getLoginInfo($request->all());
-        $machineModel = new machine_model();
-        $machineModel->nvLoginSet($request->all(), $request->ip());
-        return [
-            "status" => 201,
-            "result" => $loginInfo
-        ];
+        if ($request->type == 'PC') {
+            $nvloginModel = new nvlogin_model();
+            $loginInfo = $nvloginModel->getLoginInfo($request->all());
+            $machineModel = new machine_model();
+            $machineModel->nvLoginSet($request->all(), $request->ip());
+            return [
+                "status" => 201,
+                "result" => $loginInfo
+            ];
+        } else {
+            $couponUserModel = new coupon_user_model();
+            $couponUserResult = $couponUserModel->get($request->machine_id);
+            if ($couponUserResult) {
+                dd($couponUserResult->password);
+                if ($couponUserResult->password == $request->password) {
+                    $nvloginModel = new nvlogin_model();
+                    $loginInfo = $nvloginModel->getLoginInfo($request->all());
+                    $machineModel = new machine_model();
+                    $machineModel->nvLoginSet($request->all(), $request->ip());
+                    return [
+                        "status" => 201,
+                        "result" => $loginInfo
+                    ];
+                } else {
+                    return [
+                        "status" => 401,
+                        "result" => "Unauthorized"
+                    ];
+                }
+            } else {
+                return [
+                    "status" => 401,
+                    "result" => "Unauthorized"
+                ];
+            }
+        }
+
+
     }
 }

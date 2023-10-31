@@ -26,11 +26,12 @@ class coupon_user_model extends Model
 
     public function get($id)
     {
-        $couponUsers = $this->where('id', $id)->firstOrFail();
-        return [
-            'status' => 201,
-            'coupon_user' => $couponUsers
-        ];
+        try {
+            $couponUsers = $this->where('id', $id)->firstOrFail();
+            return $couponUsers;
+        } catch (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
+            return null;
+        }
     }
     public function set($id, $info)
     {
