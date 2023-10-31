@@ -152,15 +152,23 @@ class job_model extends Model
             $nvlogin->save();
         }
         $machineModel = new machine_model();
-        $machine = $machineModel->where('id', $info['machine_id'])->firstOrFail();
-        $machine->job_id = $job->id;
-        $machine->save();
-        $machine = $machineModel->where('job_id', $job->id)->firstOrFail();
-        $machine->job_id = null;
-        $machine->save();
-        $machine = $machineModel->where('id', $info['machine_id'])->firstOrFail();
-        $machine->job_id = $job->id;
-        $machine->save();
+        // $machine = $machineModel->where('id', $info['machine_id'])->firstOrFail();
+        // $machine->job_id = $job->id;
+        // $machine->save();
+        // $machine = null;
+        if (empty($info['machine_id'])) {
+            $machine = $machineModel->where('job_id', $job->id)->firstOrFail();
+            $machine->job_id = null;
+            $machine->save();
+        } else {
+            $machine = $machineModel->where('id', $info['machine_id'])->firstOrFail();
+            $machine->job_id = $job->id;
+            $machine->save();
+        }
+
+        // $machine->save();
+
+
         $task_goods_model = new task_goods_model();
         $task_goods_model->where('job_id', $job->id)->delete();
         foreach ($info['goods'] as $goods_id) {
