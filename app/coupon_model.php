@@ -34,6 +34,7 @@ class coupon_model extends Model
             ->join('brands', 'coupons.brand_id', '=', 'brands.id')
             ->where('coupon_categories.status', '=', 1)
             ->select('coupons.*', 'coupon_categories.name as category', 'brands.name as brand')
+            ->orderBy('created_at'.'desc')
             ->get();
         return [
             'status' => 201,
@@ -51,6 +52,7 @@ class coupon_model extends Model
                 ['coupons.status', '=', 1]
             ])
             ->select('coupons.*', 'coupon_categories.name as category', 'brands.name as brand')
+            ->orderBy('created_at' . 'desc')
             ->get();
         return $couponsList;
     }

@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcoupon_app=self.webpackChunkcoupon_app||[]).push([[130],{4130:function(n,u,e){e.r(u),e.d(u,{My:function(){return r}});var t=e(2791),c=e(184),p=(0,t.lazy)((function(){return e.e(266).then(e.bind(e,2266))})),r=function(){return(0,c.jsx)(p,{})};u.default=r}}]);
+//# sourceMappingURL=130.b04d8db7.chunk.js.map
