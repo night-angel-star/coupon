@@ -29,7 +29,7 @@ function inject() {
         setTimeout(inputUserName, inputUserNameDelayTime);
         setTimeout(inputPassword, inputPasswordDelayTime);
         setTimeout(clickLogin, clickDelayTime);
+        return navigateUri;
     }
-    return navigateUri;
 }
 inject();
