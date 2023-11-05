@@ -16,9 +16,9 @@ class MemberSeeder extends Seeder
     {
         member_model::create([
             'id' => 1,
-            'name' => "ARA",
+            'name' => "admin",
             'level_id' => 1,
-            'password' => bcrypt("laravel")
+            'password' => bcrypt("admin")
         ]);
 
         $this->command->info('Members table seeded.');
