@@ -18,7 +18,7 @@ class MemberSeeder extends Seeder
             'id' => 1,
             'name' => "admin",
             'level_id' => 1,
-            'password' => bcrypt("admin")
+            'password' => bcrypt("laravel")
         ]);
 
         $this->command->info('Members table seeded.');
