@@ -2,28 +2,52 @@ const searchIconSelector =
     ".site-nav__link.site-nav__link--icon.js-search-header.medium-up--hide";
 const searchInputSelector = ".search__input";
 const searchButtonSelector = ".btn--search";
+
 function search() {
     let searchIcon = document.querySelector(searchIconSelector);
     let searchInput = document.querySelector(searchInputSelector);
     let searchButton = document.querySelector(searchButtonSelector);
 
-    let selectDelay = 500 + Math.random() * 1000;
-    let inputDelay = selectDelay + Math.random() * 1000;
-    let searchDelay = inputDelay + Math.random() * 1000;
-
     let searchStr = "SEARCHSTRFORREPLACE";
 
-    function input(dom, value) {
-        dom.value = value;
+    let inputCharDelay = 200;
+
+    let selectDelay = 500 + Math.random() * 1000;
+    let inputDelay = selectDelay + Math.random() * 1000;
+    let searchDelay =
+        inputDelay + searchStr.length * inputCharDelay + Math.random() * 1000;
+
+    function simulateTyping(inputField, text) {
+        inputField.focus(); // Ensure the input field is focused
+
+        for (let i = 0; i < text.length; i++) {
+            const key = text[i];
+            const eventDown = new KeyboardEvent("keydown", { key });
+            const eventPress = new KeyboardEvent("keypress", { key });
+            const eventUp = new KeyboardEvent("keyup", { key });
+
+            setTimeout(() => {
+                inputField.value += key;
+                inputField.dispatchEvent(eventDown);
+                inputField.dispatchEvent(eventPress);
+                inputField.dispatchEvent(eventUp);
+
+                if (i === text.length - 1) {
+                    const eventInput = new Event("input", { bubbles: true });
+                    inputField.dispatchEvent(eventInput);
+                }
+            }, i * inputCharDelay); // Delay each character by 0.5s (500ms)
+        }
     }
 
-    function click(dom) {
-        dom.click();
-    }
+    setTimeout(() => {
+        simulateTyping(searchInput, searchStr);
+    }, inputDelay);
 
-    setTimeout(click, selectDelay, searchIcon);
-    setTimeout(input, inputDelay, searchInput, searchStr);
-    setTimeout(click, searchDelay, searchButton);
+    setTimeout(() => {
+        searchButton.click();
+    }, searchDelay);
+
     return "success";
 }
 
