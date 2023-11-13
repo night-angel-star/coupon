@@ -1,5 +1,5 @@
 function search() {
-    let searchIcon = document.querySelector(searchIconSelector);
+    // let searchIcon = document.querySelector(searchIconSelector);
     let searchInput = document.querySelector(searchInputSelector);
     let searchButton = document.querySelector(searchButtonSelector);
 
