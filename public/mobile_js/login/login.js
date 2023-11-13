@@ -1,9 +1,3 @@
-const navigateUri = "https://www.rriveter.com/account";
-const loginUri = "https://www.rriveter.com/account/login";
-const usernameInputSelector = "#CustomerEmail";
-const passwordInputSelector = "#CustomerPassword";
-const loginButtonSelector = 'button[type="submit"].btn.btn--full';
-
 let inputCharDelay = 200;
 
 function simulateTyping(inputField, text) {
@@ -30,7 +24,7 @@ function simulateTyping(inputField, text) {
 }
 
 function inject() {
-    if (window.location.href.includes(loginUri)) {
+    if (window.location.href.includes(navigateToLoginUri)) {
         const usernameInput = document.querySelector(usernameInputSelector);
         const passwordInput = document.querySelector(passwordInputSelector);
         const loginButton = document.querySelector(loginButtonSelector);
@@ -60,7 +54,7 @@ function inject() {
             loginButton.click();
         }, clickDelayTime);
 
-        return navigateUri;
+        return navigateToMyPageUri;
     }
 }
 

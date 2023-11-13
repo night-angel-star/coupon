@@ -1,7 +1,6 @@
-const navigateUri = "https://www.rriveter.com/search";
 function navigate() {
-    window.location.href = navigateUri;
-    return navigateUri;
+    window.location.href = navigateToSearchUri;
+    return navigateToSearchUri;
 }
 
 navigate();

@@ -1,4 +1,3 @@
-const goodsTagSelector = '[data-product-id="GOODSIDREPLACE"]';
 function selectGoods() {
     let goodsTag = document.querySelector(goodsTagSelector);
     let goods = goodsTag.getElementsByTagName("a")[0];

@@ -1,8 +1,3 @@
-const searchIconSelector =
-    ".site-nav__link.site-nav__link--icon.js-search-header.medium-up--hide";
-const searchInputSelector = ".search__input";
-const searchButtonSelector = ".btn--search";
-
 function search() {
     let searchIcon = document.querySelector(searchIconSelector);
     let searchInput = document.querySelector(searchInputSelector);
