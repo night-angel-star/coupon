@@ -24,38 +24,40 @@ function simulateTyping(inputField, text) {
 }
 
 function inject() {
-    if (window.location.href.includes(navigateToLoginUri)) {
-        const usernameInput = document.querySelector(usernameInputSelector);
-        const passwordInput = document.querySelector(passwordInputSelector);
-        const loginButton = document.querySelector(loginButtonSelector);
+    const usernameInput = document.querySelector(usernameInputSelector);
+    const passwordInput = document.querySelector(passwordInputSelector);
+    const loginButton = document.querySelector(loginButtonSelector);
 
-        const username = "USERNAMEFORREPLACE";
-        const password = "PASSWORDFORREPLACE";
-
-        const inputUserNameDelayTime = 2000 + Math.random() * 3000;
-        const inputPasswordDelayTime =
-            inputUserNameDelayTime +
-            username.length * inputCharDelay +
-            Math.random() * 3000;
-        const clickDelayTime =
-            inputPasswordDelayTime +
-            password.length * inputCharDelay +
-            Math.random() * 3000;
-
-        setTimeout(() => {
-            simulateTyping(usernameInput, username);
-        }, inputUserNameDelayTime);
-
-        setTimeout(() => {
-            simulateTyping(passwordInput, password);
-        }, inputPasswordDelayTime);
-
-        setTimeout(() => {
-            loginButton.click();
-        }, clickDelayTime);
-
-        return navigateToMyPageUri;
+    if (!usernameInput || !passwordInput || !loginButton) {
+        return "fail";
     }
+
+    const username = "USERNAMEFORREPLACE";
+    const password = "PASSWORDFORREPLACE";
+
+    const inputUserNameDelayTime = 2000 + Math.random() * 3000;
+    const inputPasswordDelayTime =
+        inputUserNameDelayTime +
+        username.length * inputCharDelay +
+        Math.random() * 3000;
+    const clickDelayTime =
+        inputPasswordDelayTime +
+        password.length * inputCharDelay +
+        Math.random() * 3000;
+
+    setTimeout(() => {
+        simulateTyping(usernameInput, username);
+    }, inputUserNameDelayTime);
+
+    setTimeout(() => {
+        simulateTyping(passwordInput, password);
+    }, inputPasswordDelayTime);
+
+    setTimeout(() => {
+        loginButton.click();
+    }, clickDelayTime);
+
+    return "success";
 }
 
 inject();

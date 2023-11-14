@@ -1,7 +1,12 @@
 function search() {
-    // let searchIcon = document.querySelector(searchIconSelector);
+    let searchIcon = document.querySelector(searchIconSelector);
     let searchInput = document.querySelector(searchInputSelector);
     let searchButton = document.querySelector(searchButtonSelector);
+
+    if (!searchIcon || !searchInput || !searchButton) {
+        alert("fail");
+        return "fail";
+    }
 
     let searchStr = "SEARCHSTRFORREPLACE";
 
@@ -34,6 +39,10 @@ function search() {
             }, i * inputCharDelay); // Delay each character by 0.5s (500ms)
         }
     }
+
+    setTimeout(() => {
+        searchIcon.click();
+    }, selectDelay);
 
     setTimeout(() => {
         simulateTyping(searchInput, searchStr);

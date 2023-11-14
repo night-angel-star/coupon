@@ -199,7 +199,7 @@ class job_model extends Model
             $nvlogin->job_id = $newJob->id;
             $nvlogin->save();
         }
-        if (!empty($info['login_id'])) {
+        if (!empty($info['machine_id'])) {
             $machineModel = new machine_model();
             $machine = $machineModel->where('id', $info['machine_id'])->firstOrFail();
             $machine->job_id = $newJob->id;
