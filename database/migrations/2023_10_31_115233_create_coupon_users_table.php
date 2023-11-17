@@ -17,6 +17,9 @@ class CreateCouponUsersTable extends Migration
             $table->id();
             $table->String("user");
             $table->String("password");
+            $table->String("nv_user");
+            $table->String("nv_password");
+            $table->integer("job_id")->nullable();
             $table->timestamps();
         });
     }
