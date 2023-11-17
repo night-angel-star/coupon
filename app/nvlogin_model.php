@@ -73,8 +73,8 @@ class nvlogin_model extends Model
     public function del($id)
     {
         $nvlogin = $this->where('id', $id)->delete();
-        // $jobModel = new job_model();
-        // $jobModel->unsetLogin($id);
+        $jobModel = new job_model();
+        $jobModel->unsetLogin($id);
         return [
             'status' => 201,
             'message' => 'Resource deleted.',
@@ -149,5 +149,54 @@ class nvlogin_model extends Model
         } else {
             return null;
         }
+    }
+
+    public function getPhoneJob($info)
+    {
+        if ($info->job_id && $info->job_id != -1) {
+
+            $job = DB::table('jobs')->where('id', $info->job_id)->first();
+            $goods_model = new goods_model();
+            $surfing_model = new surfing_model();
+
+            $task_goods = DB::table("task_goods")
+                ->where("job_id", $job->id)
+                ->get();
+
+            $goodsList = collect([]);
+            if (json_encode($task_goods) != "[]") {
+                foreach ($task_goods as $task_good) {
+
+                    $goods = $goods_model->where('id', $task_good->goods_id)->firstOrFail();
+                    $goodsList->push($goods);
+                }
+            }
+
+            $surfingsList = collect([]);
+            $task_surfings = DB::table("task_surfings")
+                ->where("job_id", $job->id)
+                ->get();
+            if (json_encode($task_surfings) != "[]") {
+                foreach ($task_surfings as $task_surfing) {
+                    $surfing = $surfing_model->where('id', $task_surfing->surfing_id)->firstOrFail();
+                    $surfing->delay = $task_surfing->delay;
+                    $surfingsList->push($surfing);
+                }
+            }
+
+            $job_info = [
+                'goods' => $goodsList,
+                'surfings' => $surfingsList,
+            ];
+            if ($job->login_id) {
+                $login = (object) ["user" => $info->nv_user, "password" => $info->nv_password];
+                return ["login_info" => $login, "job_info" => $job_info, 'machine_info' => (object) ["machine_id" => $info->user]];
+            } else {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
     }
 }

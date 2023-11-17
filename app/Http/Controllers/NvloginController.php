@@ -187,7 +187,7 @@ class NvloginController extends APIController
 
     public function getLoginInfo(Request $request)
     {
-        if ($request->type == 'PC') {
+        if (strtoupper($request->type) == 'PC') {
             $nvloginModel = new nvlogin_model();
             $loginInfo = $nvloginModel->getLoginInfo($request->all());
             $machineModel = new machine_model();
@@ -202,10 +202,9 @@ class NvloginController extends APIController
             if ($couponUserResult) {
 
                 if ($couponUserResult->password == $request->password) {
+
                     $nvloginModel = new nvlogin_model();
-                    $loginInfo = $nvloginModel->getLoginInfo($request->all());
-                    $machineModel = new machine_model();
-                    $machineModel->nvLoginSet($request->all(), $request->ip());
+                    $loginInfo = $nvloginModel->getPhoneJob($couponUserResult);
                     return [
                         "status" => 201,
                         "result" => $loginInfo
@@ -224,6 +223,34 @@ class NvloginController extends APIController
             }
         }
 
+
+    }
+
+    public function getPhoneJob(Request $request)
+    {
+        $couponUserModel = new coupon_user_model();
+        $couponUserResult = $couponUserModel->get($request->machine_id);
+        if ($couponUserResult) {
+
+            if ($couponUserResult->password == $request->password) {
+                $nvloginModel = new nvlogin_model();
+                $loginInfo = $nvloginModel->getPhoneJob($couponUserResult);
+                return [
+                    "status" => 201,
+                    "result" => $loginInfo
+                ];
+            } else {
+                return [
+                    "status" => 401,
+                    "result" => "Unauthorized"
+                ];
+            }
+        } else {
+            return [
+                "status" => 401,
+                "result" => "Unauthorized"
+            ];
+        }
 
     }
 }

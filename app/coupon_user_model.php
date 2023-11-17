@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use PHPUnit\Framework\Constraint\IsEmpty;
 
 class coupon_user_model extends Model
 {
@@ -24,6 +25,16 @@ class coupon_user_model extends Model
         ];
     }
 
+
+    public function listall($page = 0, $limit = 1000)
+    {
+        $couponUsers = DB::table('coupon_users')
+            ->leftJoin('jobs', 'coupon_users.job_id', '=', 'jobs.id')
+            ->select('coupon_users.*', 'jobs.name as job_name')
+            ->get();
+        return $couponUsers;
+    }
+
     public function get($user)
     {
         try {
@@ -38,6 +49,13 @@ class coupon_user_model extends Model
         $couponUsers = $this->where('id', $id)->firstOrFail();
         $couponUsers->user = $info['user'];
         $couponUsers->password = $info['password'];
+        $couponUsers->nv_user = $info['nv_user'];
+        $couponUsers->nv_password = $info['nv_password'];
+        if (empty($info['job_id'])) {
+            $couponUsers->job_id = -1;
+        } else {
+            $couponUsers->job_id = $info['job_id'];
+        }
         $couponUsers->save();
         return [
             'status' => 201,
@@ -51,6 +69,9 @@ class coupon_user_model extends Model
         $this->create([
             'user' => $info['user'],
             'password' => $info['password'],
+            'nv_user' => $info['nv_user'],
+            'nv_password' => $info['nv_password'],
+            'job_id' => empty($info['job_id']) ? -1 : $info['job_id'],
         ]);
     }
     public function del($id)

@@ -20,7 +20,7 @@ class CouponUserController extends APIController
 
         $permission = $this->getPermission($user);
         if ($permission) {
-            $couponUserList = $couponUserModel->all();
+            $couponUserList = $couponUserModel->listall();
 
             $log = new log_model();
             $log->Add(

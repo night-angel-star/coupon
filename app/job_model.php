@@ -230,6 +230,8 @@ class job_model extends Model
         $nvloginModel->where('job_id', $id)->update(['job_id' => null]);
         $machineModel = new machine_model();
         $machineModel->where('job_id', $id)->update(['job_id' => null]);
+        $couponUserModel = new coupon_user_model();
+        $couponUserModel->where('job_id', $id)->update(['job_id' => -1]);
         return [
             'status' => 201,
             'message' => 'Resource deleted.',
