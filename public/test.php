@@ -33,7 +33,7 @@ session_start();
         <H1>This is Home page</H1>
     <?php } else if ($act == "shop") { ?>
             <H1>This is Shop page</H1>
-            <form method=post>
+            <form method=post action="<?=$_SERVER["SCRIPT_NAME"]?>">
                 <input type=hidden name=act value="search_result">
                 <input type=text name="query" id="query" class="sh_input">
                 <input type=submit class="sch_btn_search">

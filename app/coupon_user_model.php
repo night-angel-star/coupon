@@ -85,7 +85,15 @@ class coupon_user_model extends Model
 
     public function getJob($id)
     {
-
+        $goods = DB::table('task_goods')
+            ->join('goods', 'task_goods.goods_id', '=', 'goods.id')
+            ->where('task_goods.job_id', '=', $id)
+            ->get();
+        $surfings = DB::table('task_surfings')
+            ->join('surfings', 'task_surfings.surfing_id', '=', 'surfings.id')
+            ->where('task_surfings.job_id', '=', $id)
+            ->get();
+        return ["goods" => $goods, "surfings" => $surfings];
     }
 
 

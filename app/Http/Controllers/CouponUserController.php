@@ -157,7 +157,7 @@ class CouponUserController extends APIController
     public function loginOp(Request $request)
     {
         $couponUserModel = new coupon_user_model();
-        $couponUserResult = $couponUserModel->get($request->machine_id);
+        $couponUserResult = $couponUserModel->get($request->user);
         if ($couponUserResult) {
 
             if ($couponUserResult->password == $request->password) {
@@ -182,7 +182,7 @@ class CouponUserController extends APIController
     public function getJob(Request $request)
     {
         $couponUserModel = new coupon_user_model();
-        $result = $couponUserModel->getJob($request->job_id);
+        $result = $couponUserModel->getJob($request["job_id"]);
         if ($result) {
             return [
                 "status" => 200,
