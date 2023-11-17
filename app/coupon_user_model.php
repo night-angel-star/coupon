@@ -83,5 +83,10 @@ class coupon_user_model extends Model
         ];
     }
 
+    public function getJob($id)
+    {
+
+    }
+
 
 }

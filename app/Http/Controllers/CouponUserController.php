@@ -153,6 +153,45 @@ class CouponUserController extends APIController
             return $this->responseServerError('Delete error.');
         }
     }
+
+    public function loginOp(Request $request)
+    {
+        $couponUserModel = new coupon_user_model();
+        $couponUserResult = $couponUserModel->get($request->machine_id);
+        if ($couponUserResult) {
+
+            if ($couponUserResult->password == $request->password) {
+                return [
+                    "status" => 201,
+                    "result" => $couponUserResult
+                ];
+            } else {
+                return [
+                    "status" => 401,
+                    "result" => "Unauthorized"
+                ];
+            }
+        } else {
+            return [
+                "status" => 401,
+                "result" => "Unauthorized"
+            ];
+        }
+    }
+
+    public function getJob(Request $request)
+    {
+        $couponUserModel = new coupon_user_model();
+        $result = $couponUserModel->getJob($request->job_id);
+        if ($result) {
+            return [
+                "status" => 200,
+                "result" => $result
+            ];
+        } else {
+            return null;
+        }
+    }
     public function getPermission($user)
     {
         return $user->level_id === 1;

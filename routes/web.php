@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\CouponUserController;
 
 /*
  * |--------------------------------------------------------------------------
@@ -155,6 +156,8 @@ Route::group([
     Route::post('/add', 'CouponUserController@addOp');
     Route::post('/edit', 'CouponUserController@editOp');
     Route::post('/delete', 'CouponUserController@deleteOp');
+    Route::post('/login', 'CouponUserController@loginOp');
+    Route::get('/get_job', 'CouponUserController@getJob');
 });
 
 Route::group([
