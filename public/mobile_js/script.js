@@ -6,6 +6,26 @@ function goto_home() {
     window.location.href = home_url;
     return "success";
 }
+function scrollToSmoothly(pos, time) {
+    var currentPos = window.pageYOffset;
+    var start = null;
+    if(time == null) time = 500;
+    pos = +pos, time = +time;
+    window.requestAnimationFrame(function step(currentTime) {
+        start = !start ? currentTime : start;
+        var progress = currentTime - start;
+        if (currentPos < pos) {
+            window.scrollTo(0, ((pos - currentPos) * progress / time) + currentPos);
+        } else {
+            window.scrollTo(0, currentPos - ((currentPos - pos) * progress / time));
+        }
+        if (progress < time) {
+            window.requestAnimationFrame(step);
+        } else {
+            window.scrollTo(0, pos);
+        }
+    });
+}
 
 function goto_start_page() {
     menu_items = document.querySelectorAll(menu_item_class);
@@ -186,6 +206,7 @@ function go_back(){
 }
 
 function do_shop() {
+    scrollToSmoothly(document.body.scrollHeight, 5000);
     go_back();
     return "success";
 }
