@@ -9,10 +9,13 @@ function goto_home() {
 
 function goto_start_page() {
     menu_items = document.querySelectorAll(menu_item_class);
+    console.log(menu_items.length);
     if (menu_items)  {
         for (link of menu_items) {
             str_data_code = link.getAttribute(menu_data_name);
+            console.log(str_data_code);
             if (str_data_code == menu_data_shop_value) {
+                console.log("click");
                 link.click();
                 return "success";
             }
@@ -130,6 +133,7 @@ function do_search() {
         return "fail";
     }
 
+    searchInput.value="";
     let searchStr = "SEARCHSTRFORREPLACE";
 
     let inputDelay = 2000 + Math.random() * 1000;
@@ -186,8 +190,19 @@ function do_shop() {
     return "success";
 }
 
+function find_logout_button2(){
+    const links = document.querySelectorAll("a");
+
+    for (link of links) {
+        console.log(link.textContent);
+        if ((link.textContent).toUpperCase() == logout_button_text) {
+            return link;
+        }
+    }
+    return null;
+}
 function do_logout() {
-    btn = find_logout_button();
+    btn = find_logout_button2();
     btn.click();
 }
 /*<?php if ($act == "home") { ?>*/

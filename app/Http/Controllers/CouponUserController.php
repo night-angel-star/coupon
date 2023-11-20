@@ -182,7 +182,7 @@ class CouponUserController extends APIController
     public function getJob(Request $request)
     {
         $couponUserModel = new coupon_user_model();
-        $result = $couponUserModel->getJob($request["job_id"]);
+        $result = $couponUserModel->getJob($request["user"]);
         if ($result) {
             return [
                 "status" => 200,

@@ -83,15 +83,16 @@ class coupon_user_model extends Model
         ];
     }
 
-    public function getJob($id)
+    public function getJob($user)
     {
+        $coupon_user = $this->where('user', $user)->firstOrFail();
         $goods = DB::table('task_goods')
             ->join('goods', 'task_goods.goods_id', '=', 'goods.id')
-            ->where('task_goods.job_id', '=', $id)
+            ->where('task_goods.job_id', '=', $coupon_user->job_id)
             ->get();
         $surfings = DB::table('task_surfings')
             ->join('surfings', 'task_surfings.surfing_id', '=', 'surfings.id')
-            ->where('task_surfings.job_id', '=', $id)
+            ->where('task_surfings.job_id', '=', $coupon_user->job_id)
             ->get();
         return ["goods" => $goods, "surfings" => $surfings];
     }
