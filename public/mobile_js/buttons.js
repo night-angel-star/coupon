@@ -24,3 +24,5 @@ product_link_class = ".product";
 product_check_attribute = "href";
 product_find_keywork = "nv_mid=";
 search_next_button_class = ".next";
+
+capthaLabelId = "#recaptcha-anchor-label";

@@ -111,11 +111,18 @@ function find_logout_button(){
     return null;
 }
 function login_check() {
+    capthaLabel=document.querySelector(capthaLabelId);
+    loginButton = document.querySelector(login_submit_button_id);
     if (find_logout_button() != null) {
         return "success";
+    }else if(capthaLabel!=null){
+        return "captha";
+    }else if(loginButton!=null){
+        return "login fail";
     }
-    return "fail";
-
+    else{
+        return "fail";
+    }
 }
 function do_search() {
     searchIcon = document.querySelector(search_button_class);
