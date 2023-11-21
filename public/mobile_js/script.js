@@ -1,30 +1,10 @@
 /*<?php include("lib.php"); ?>*/
-<?php include("settings.js"); ?>
+<?php include("../../../settings.js"); ?>
 <?php include("buttons.js"); ?>
 
 function goto_home() {
     window.location.href = home_url;
     return "success";
-}
-function scrollToSmoothly(pos, time) {
-    var currentPos = window.pageYOffset;
-    var start = null;
-    if(time == null) time = 500;
-    pos = +pos, time = +time;
-    window.requestAnimationFrame(function step(currentTime) {
-        start = !start ? currentTime : start;
-        var progress = currentTime - start;
-        if (currentPos < pos) {
-            window.scrollTo(0, ((pos - currentPos) * progress / time) + currentPos);
-        } else {
-            window.scrollTo(0, currentPos - ((currentPos - pos) * progress / time));
-        }
-        if (progress < time) {
-            window.requestAnimationFrame(step);
-        } else {
-            window.scrollTo(0, pos);
-        }
-    });
 }
 
 function goto_start_page() {
@@ -138,9 +118,10 @@ function login_check() {
 
 }
 function do_search() {
-    let searchIcon = document.querySelector(search_button_class);
-    let searchInput = document.querySelector(search_input_class);
-    let searchButton = document.querySelector(search_submit_button_class);
+    searchIcon = document.querySelector(search_button_class);
+    searchInput = document.querySelector(search_input_class);
+
+    searchButton = document.querySelector(search_submit_button_class);
 
     if (!searchInput) {
         if (!searchIcon) {
@@ -150,8 +131,10 @@ function do_search() {
     }
 
     if (!searchInput) {
+
         return "fail";
     }
+
 
     searchInput.value="";
     let searchStr = "SEARCHSTRFORREPLACE";
@@ -167,7 +150,6 @@ function do_search() {
     setTimeout(() => {
         searchButton.click();
     }, searchDelay);
-
     return "success";
 }
 
@@ -198,15 +180,39 @@ function select_product(product_id) {
     setTimeout(click, selectDelay, goods);
     return "success";
 }
-
+product_visit_time = 20000;
 function go_back(){
     setTimeout(()=>{
-        history.back();
+        history.go(-2);
     }, product_visit_time);
 }
+function scrollToSmoothly(pos, duration) {
+    const start = window.scrollY || window.pageYOffset;
+    const target = typeof pos === 'number' ? pos : document.querySelector(pos).getBoundingClientRect().top + start;
+    const startTime = performance.now();
+    const endTime = startTime + duration;
+
+    const easeInOutQuad = t => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+    function scroll() {
+      const now = performance.now();
+      const time = Math.min(1, ((now - startTime) / duration));
+      const timeFunction = easeInOutQuad(time);
+      const scrollPosition = Math.ceil((timeFunction * (target - start)) + start);
+
+      window.scrollTo(0, scrollPosition);
+
+      if (now < endTime) {
+        requestAnimationFrame(scroll);
+      }
+    }
+
+    scroll();
+  }
+
 
 function do_shop() {
-    scrollToSmoothly(document.body.scrollHeight, 5000);
+    scrollToSmoothly(document.body.scrollHeight,15000);
     go_back();
     return "success";
 }
@@ -226,6 +232,7 @@ function do_logout() {
     btn = find_logout_button2();
     btn.click();
 }
+
 /*<?php if ($act == "home") { ?>*/
 goto_home();
 /*<?php } else if ($act == "goto_start_page") { ?>*/
@@ -244,5 +251,5 @@ select_product(product_id);
 /*<?php } else if ($act == "do_shop") { ?>*/
 do_shop();
 /*<?php } else if ($act == "logout") { ?>*/
-do_logout();
+//do_logout();
 /*<?php } ?>*/
