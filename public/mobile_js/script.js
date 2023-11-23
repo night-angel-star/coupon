@@ -2,6 +2,38 @@
 <?php include("../../../settings.js"); ?>
 <?php include("buttons.js"); ?>
 
+start_time_hour = 10;
+start_time_min = 00;
+
+function make_oclock() {
+    s = document.createElement("div");
+    s.classList.add("oclock");
+    document.body.appendChild(s);
+    displayTime();
+}
+function displayTime() {
+    element = document.querySelector(".oclock");
+    e = new Date();
+    element.innerHTML = e.toLocaleTimeString('en-US');
+}
+
+function start() {
+    setTimeout(() => {
+        now = new Date();
+        if (now.getHours() == start_time_hour && now.getMinutes() == start_time_min) {
+            window.location.href = home_url;
+        } else {
+            displayTime();
+            start();
+        }
+    }, 1000);
+
+}
+function goto_home2() {
+    make_oclock();
+    start();
+    return "success";
+}
 function goto_home() {
     window.location.href = home_url;
     return "success";
@@ -9,7 +41,6 @@ function goto_home() {
 
 function goto_start_page() {
     menu_items = document.querySelectorAll(menu_item_class);
-    console.log(menu_items.length);
     if (menu_items)  {
         for (link of menu_items) {
             str_data_code = link.getAttribute(menu_data_name);
@@ -111,18 +142,11 @@ function find_logout_button(){
     return null;
 }
 function login_check() {
-    capthaLabel=document.querySelector(capthaLabelId);
-    loginButton = document.querySelector(login_submit_button_id);
     if (find_logout_button() != null) {
         return "success";
-    }else if(capthaLabel!=null){
-        return "captha";
-    }else if(loginButton!=null){
-        return "login fail";
     }
-    else{
-        return "fail";
-    }
+    return "fail";
+
 }
 function do_search() {
     searchIcon = document.querySelector(search_button_class);
@@ -242,6 +266,8 @@ function do_logout() {
 
 /*<?php if ($act == "home") { ?>*/
 goto_home();
+/*<?php } else if ($act == "home2") { ?>*/
+goto_home2();
 /*<?php } else if ($act == "goto_start_page") { ?>*/
 goto_start_page();
 /*<?php } else if ($act == "goto_login") { ?>*/

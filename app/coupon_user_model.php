@@ -12,7 +12,10 @@ class coupon_user_model extends Model
     use HasFactory;
     protected $fillable = [
         'user',
-        'password'
+        'password',
+        'nv_user',
+        'nv_password',
+        'job_id'
     ];
     protected $table = "coupon_users";
 

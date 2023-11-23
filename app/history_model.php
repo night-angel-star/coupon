@@ -38,7 +38,7 @@ class history_model extends Model
                 ['time', '>', new DateTime($from)],
                 ['time', '<', new DateTime($to)]
             ])
-            ->offset($page * $limit)->limit($limit)->get();
+            ->offset($page * $limit)->limit($limit)->orderBy("time", 'desc')->get();
         return [
             'status' => 201,
             'historylist' => $historyList
