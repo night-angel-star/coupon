@@ -89,6 +89,7 @@ class coupon_user_model extends Model
     public function getJob($user)
     {
         $coupon_user = $this->where('user', $user)->firstOrFail();
+        $job = DB::table('jobs')->where('id', $coupon_user->job_id)->first();
         $goods = DB::table('task_goods')
             ->join('goods', 'task_goods.goods_id', '=', 'goods.id')
             ->where('task_goods.job_id', '=', $coupon_user->job_id)
@@ -97,7 +98,7 @@ class coupon_user_model extends Model
             ->join('surfings', 'task_surfings.surfing_id', '=', 'surfings.id')
             ->where('task_surfings.job_id', '=', $coupon_user->job_id)
             ->get();
-        return ["goods" => $goods, "surfings" => $surfings];
+        return ["goods" => $goods, "surfings" => $surfings, "job" => $job];
     }
 
 
