@@ -211,7 +211,7 @@ function select_product(product_id) {
     setTimeout(click, selectDelay, goods);
     return "success";
 }
-product_visit_time = 20000;
+product_visit_time = 40000;
 function go_back(){
     setTimeout(()=>{
         history.go(-2);
