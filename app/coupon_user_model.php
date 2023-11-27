@@ -15,7 +15,8 @@ class coupon_user_model extends Model
         'password',
         'nv_user',
         'nv_password',
-        'job_id'
+        'job_id',
+        'time'
     ];
     protected $table = "coupon_users";
 
@@ -59,6 +60,7 @@ class coupon_user_model extends Model
         } else {
             $couponUsers->job_id = $info['job_id'];
         }
+        $couponUsers->time = $info['time'];
         $couponUsers->save();
         return [
             'status' => 201,
@@ -75,6 +77,7 @@ class coupon_user_model extends Model
             'nv_user' => $info['nv_user'],
             'nv_password' => $info['nv_password'],
             'job_id' => empty($info['job_id']) ? -1 : $info['job_id'],
+            'time' => $info['time']
         ]);
     }
     public function del($id)
