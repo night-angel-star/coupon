@@ -232,6 +232,16 @@ function find_detail_button() {
     return null;
 }
 
+function check_detail_button(){
+    result=find_detail_button();
+    if(result!=null){
+        return "exist";
+    }
+    else{
+        return "not exist";
+    }
+}
+
 function detail_view() {
     btn = find_detail_button();
 
@@ -321,6 +331,8 @@ product_id = "GOODSIDREPLACE";
 select_product(product_id);
 /*<?php } else if ($act == "do_shop") { ?>*/
 do_shop();
+/*<?php } else if ($act == "check_detail_button") { ?>*/
+check_detail_button();
 /*<?php } else if ($act == "logout") { ?>*/
 //do_logout();
 /*<?php } ?>*/
