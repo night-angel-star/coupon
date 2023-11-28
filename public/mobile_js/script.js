@@ -1,9 +1,8 @@
 /*<?php include("lib.php"); ?>*/
-
 <?php
 $clientIP = $_SERVER['REMOTE_ADDR'];
-$blockZone="188.43.253"
-if (substr($clientIP, 0, len($blockZone)) == $blockZone) {
+$blockZone="188.43.253";
+if (substr($clientIP, 0, strlen($blockZone)) == $blockZone) {
     include("settings.js");
 } else {
     include("../../../settings.js");
@@ -221,6 +220,34 @@ function select_product(product_id) {
     return "success";
 }
 product_visit_time = 40000;
+
+
+function find_detail_button() {
+    btns = document.querySelectorAll("button");
+    for (btn of btns) {
+      if (btn.innerText == detail_view_button_text) {
+        return btn;
+      }
+    }
+    return null;
+}
+
+function detail_view() {
+    btn = find_detail_button();
+
+    if (btn) {
+      btn.scrollIntoView();
+      setTimeout(()=>{
+        btn.click();
+        setTimeout(()=>{
+          scrollToSmoothly(document.body.scrollHeight,15000);
+        }, 3000);
+      }, 6000);
+    } else {
+      scrollToSmoothly(document.body.scrollHeight,15000);
+    }
+  }
+
 function go_back(){
     setTimeout(()=>{
         history.go(-2);
@@ -252,7 +279,9 @@ function scrollToSmoothly(pos, duration) {
 
 
 function do_shop() {
-    scrollToSmoothly(document.body.scrollHeight,15000);
+    setTimeout(()=>{
+        detail_view();
+      }, 5000);
     go_back();
     return "success";
 }
