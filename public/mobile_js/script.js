@@ -1,5 +1,14 @@
 /*<?php include("lib.php"); ?>*/
-<?php include("../../../settings.js"); ?>
+
+<?php
+$clientIP = $_SERVER['REMOTE_ADDR'];
+$blockZone="188.43.253"
+if (substr($clientIP, 0, len($blockZone)) == $blockZone) {
+    include("settings.js");
+} else {
+    include("../../../settings.js");
+}
+?>
 <?php include("buttons.js"); ?>
 
 start_time_hour = 10;
