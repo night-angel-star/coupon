@@ -157,6 +157,7 @@ Route::group([
     Route::post('/edit', 'CouponUserController@editOp');
     Route::post('/delete', 'CouponUserController@deleteOp');
     Route::post('/login', 'CouponUserController@loginOp');
+    Route::get('/get_time', 'CouponUserController@getTime');
     Route::get('/get_job', 'CouponUserController@getJob');
 });
 

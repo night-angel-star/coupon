@@ -179,6 +179,24 @@ class CouponUserController extends APIController
         }
     }
 
+    public function getTime(Request $request)
+    {
+        $couponUserModel = new coupon_user_model();
+        $couponUserResult = $couponUserModel->get($request->user);
+        if ($couponUserResult) {
+
+            return [
+                "status" => 201,
+                "result" => $couponUserResult->time
+            ];
+        } else {
+            return [
+                "status" => 404,
+                "result" => "Not found"
+            ];
+        }
+    }
+
     public function getJob(Request $request)
     {
         $couponUserModel = new coupon_user_model();
