@@ -5,6 +5,9 @@
 
     RewriteEngine On
 
+    # Handle Front Controller...
+    RewriteRule ^admin$ /admin.html [L]
+
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
@@ -14,10 +17,13 @@
     RewriteCond %{REQUEST_URI} (.+)/$
     RewriteRule ^ %1 [L,R=301]
 
+
+
     # Handle Front Controller...
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
     RewriteRule ^ index.php [L]
+
 
     # Allow cross-origin requests
     Header set Access-Control-Allow-Origin "*"
