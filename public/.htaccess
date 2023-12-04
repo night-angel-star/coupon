@@ -6,7 +6,7 @@
     RewriteEngine On
 
     # Handle Front Controller...
-    RewriteRule ^admin$ /admin.html [L]
+    RewriteRule ^coupon/admin$ /admin.html [L]
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
