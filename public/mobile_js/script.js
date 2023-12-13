@@ -258,6 +258,24 @@ function detail_view() {
     }
   }
 
+function detail_view2() {
+    btn = find_detail_button();
+
+    if (btn) {
+      btn.scrollIntoView();
+      setTimeout(()=>{
+        btn.click();
+        setTimeout(()=>{
+          scrollToSmoothly(document.body.scrollHeight,15000);
+        }, 3000);
+      }, 6000);
+	go_back();
+    } else {
+      //scrollToSmoothly(document.body.scrollHeight,15000);
+	setTimeout(()=>{detail_view2();}, 1000);
+    }
+  }
+
 function go_back(){
     setTimeout(()=>{
         history.go(-2);
@@ -296,6 +314,14 @@ function do_shop() {
     return "success";
 }
 
+function do_shop2() {
+    setTimeout(()=>{
+        detail_view2();
+      }, 5000);
+    
+    return "success";
+}
+
 function find_logout_button2(){
     const links = document.querySelectorAll("a");
 
@@ -331,6 +357,8 @@ product_id = "GOODSIDREPLACE";
 select_product(product_id);
 /*<?php } else if ($act == "do_shop") { ?>*/
 do_shop();
+/*<?php } else if ($act == "do_shop2") { ?>*/
+do_shop2();
 /*<?php } else if ($act == "check_detail_button") { ?>*/
 check_detail_button();
 /*<?php } else if ($act == "logout") { ?>*/
