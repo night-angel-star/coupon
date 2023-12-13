@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkcoupon_app=self.webpackChunkcoupon_app||[]).push([[266],{2266:function(t,n,e){e.r(n),e.d(n,{MyCart:function(){return c}});e(2791);var a=e(9434),r=e(184),c=function(){(0,a.v9)((function(t){return t.cart.cart}));var t=localStorage.getItem("updateDate");return(0,r.jsx)("div",{children:(0,r.jsx)("div",{children:"Update Date : ".concat(t||"Version info not exist")})})};n.default=c}}]);
+//# sourceMappingURL=266.8f0fea4d.chunk.js.map
