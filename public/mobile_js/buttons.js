@@ -1,6 +1,6 @@
 menu_item_class = ".shs_link.ITEM";
 menu_data_name = "data-code";
-menu_data_shop_value = "menu.SHOPPING";
+menu_data_shop_value = "menu.SHOP_VOGUE";
 login_button_class = ".cc_btn_login";
 login_user_field_id = "#id";
 login_user_field_name = "id";
