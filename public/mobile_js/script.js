@@ -219,7 +219,7 @@ function select_product(product_id) {
     setTimeout(click, selectDelay, goods);
     return "success";
 }
-product_visit_time = 40000;
+product_visit_time = 50000;
 
 
 function find_detail_button() {
@@ -250,11 +250,11 @@ function detail_view() {
       setTimeout(()=>{
         btn.click();
         setTimeout(()=>{
-          scrollToSmoothly(document.body.scrollHeight,15000);
+          scrollToSmoothly(document.body.scrollHeight,30000);
         }, 3000);
       }, 6000);
     } else {
-      scrollToSmoothly(document.body.scrollHeight,15000);
+      scrollToSmoothly(document.body.scrollHeight,30000);
     }
   }
 
@@ -318,7 +318,7 @@ function do_shop2() {
     setTimeout(()=>{
         detail_view2();
       }, 5000);
-    
+
     return "success";
 }
 
